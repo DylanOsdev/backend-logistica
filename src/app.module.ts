@@ -6,6 +6,11 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { EmployeesModule } from './employees/employees.module';
 import { AuthModule } from './auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
+import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
+import { AuditModule } from './audit/audit.module';
+import { FinancesModule } from './finances/finances.module';
 
 @Module({
   imports: [
@@ -24,9 +29,7 @@ import { AuthModule } from './auth/auth.module';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        // En producción: cambiar a false y usar migraciones
-        synchronize: config.get<string>('NODE_ENV') !== 'production',
-        // Evita el ECONNRESET/duplicate-enum warning al reiniciar en dev
+        synchronize: false,
         retryAttempts: 3,
         retryDelay: 1500,
         connectTimeoutMS: 10000,
@@ -36,6 +39,11 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     EmployeesModule,
     AuthModule,
+    CategoriesModule,
+    ProductsModule,
+    OrdersModule,
+    AuditModule,
+    FinancesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

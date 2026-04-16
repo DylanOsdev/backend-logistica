@@ -19,11 +19,11 @@ export class AuthService {
   ) {}
 
   /**
-   * RF-01: Registro de Clientes
-   * RF-02: Validación de Edad (mínimo 18 años)
+   * Registro de Clientes
+   * Validación de Edad (mínimo 18 años)
    */
   async register(dto: CreateUserDto) {
-    // Validación de edad mínima 18 años (RF-02)
+    // Validación de edad mínima 18 años
     const fechaNac = new Date(dto.fechaNacimiento);
     const hoy = new Date();
     const edad = hoy.getFullYear() - fechaNac.getFullYear();
@@ -39,7 +39,7 @@ export class AuthService {
       );
     }
 
-    // Unicidad de correo (RF-01: Unicidad)
+    // Unicidad de correo
     const existente = await this.usersService.findByEmail(dto.correo);
     if (existente) {
       throw new ConflictException(
@@ -47,7 +47,7 @@ export class AuthService {
       );
     }
 
-    // Hash de contraseña (nunca texto plano en BD)
+    // Hash de contraseña
     const SALT_ROUNDS = 10;
     const passwordHash = await bcrypt.hash(dto.password, SALT_ROUNDS);
 
@@ -69,12 +69,12 @@ export class AuthService {
   }
 
   /**
-   * RF-04: Inicio de Sesión — genera JWT
+   * Inicio de Sesión — genera JWT
    */
   async login(dto: LoginDto) {
     const usuario = await this.usersService.findByEmail(dto.correo);
 
-    // Usuario no existe o está bloqueado (RF-08)
+    // Usuario no existe o está bloqueado
     if (!usuario) {
       throw new UnauthorizedException('Credenciales incorrectas.');
     }
@@ -85,7 +85,7 @@ export class AuthService {
       );
     }
 
-    // Verificar contraseña contra el hash guardado (RF-04: Cifrado)
+    // Verificar contraseña contra el hash guardado
     const passwordValida = await bcrypt.compare(
       dto.password,
       usuario.passwordHash,
@@ -109,7 +109,7 @@ export class AuthService {
   }
 
   /**
-   * RF-06: Recuperación de contraseña (placeholder — pendiente integración de email)
+   Recuperación de contraseña (placeholder — pendiente integración de email)
    */
   async forgotPassword(correo: string) {
     const usuario = await this.usersService.findByEmail(correo);

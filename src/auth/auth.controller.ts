@@ -28,8 +28,8 @@ export class AuthController {
   ) {}
 
   /**
-   * RF-01: Registro de nuevos clientes
-   * RF-02: Valida que el usuario tenga mínimo 18 años
+   * Registro de nuevos clientes
+   * Valida que el usuario tenga mínimo 18 años
    * POST /auth/register
    */
   @Post('register')
@@ -38,7 +38,7 @@ export class AuthController {
   }
 
   /**
-   * RF-04: Inicio de Sesión — retorna JWT
+   * Inicio de Sesión — retorna JWT
    * POST /auth/login
    */
   @Post('login')
@@ -48,7 +48,7 @@ export class AuthController {
   }
 
   /**
-   * RF-07: Cierre de Sesión
+   * Cierre de Sesión
    * POST /auth/logout
    * Nota: El JWT es stateless. El frontend debe eliminar el token.
    * Para invalidación real, se usará Redis en la Fase 2 (blacklist de tokens).
@@ -64,7 +64,7 @@ export class AuthController {
   }
 
   /**
-   * RF-06: Recuperación de contraseña vía correo
+   * Recuperación de contraseña vía correo
    * POST /auth/forgot-password
    */
   @Post('forgot-password')
@@ -74,7 +74,7 @@ export class AuthController {
   }
 
   /**
-   * RF-08: Admin bloquea el acceso de un usuario
+   * Admin bloquea el acceso de un usuario
    * PATCH /auth/users/:id/block
    */
   @Patch('users/:id/block')
