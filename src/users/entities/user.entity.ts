@@ -2,10 +2,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
   OneToMany,
 } from 'typeorm';
 import { UserAddress } from './address.entity';
+import { BaseEntity } from '../../common/database/base.entity';
 
 // Volvemos a los nombres originales para no romper los Services y Guards
 export enum RolUsuario {
@@ -26,7 +26,7 @@ export enum AvailabilityStatus {
 }
 
 @Entity({ name: 'usuarios' })
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { name: 'id_usuario' })
   idUsuario: number; // Corregido: Coincide con lo que usan los Services
 
@@ -68,9 +68,6 @@ export class User {
 
   @Column({ name: 'aceptacion_habeas_data', default: true })
   aceptacionHabeasData: boolean;
-
-  @CreateDateColumn({ name: 'fecha_registro' })
-  fechaRegistro: Date;
 
   @OneToMany(() => UserAddress, (address) => address.user)
   addresses: UserAddress[];

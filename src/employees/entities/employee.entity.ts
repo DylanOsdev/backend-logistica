@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { BaseEntity } from '../../common/database/base.entity';
 
 export enum DisponibilidadEmpleado {
   DISPONIBLE = 'Disponible',
@@ -13,7 +14,7 @@ export enum DisponibilidadEmpleado {
 }
 
 @Entity('empleados')
-export class Employee {
+export class Employee extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { name: 'id_empleado' })
   idEmpleado: number;
 

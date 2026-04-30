@@ -2,13 +2,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
   ManyToOne,
   JoinColumn,
   OneToMany,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { OrderDetail } from './order-detail.entity';
+import { BaseEntity } from '../../common/database/base.entity';
 
 export enum PaymentMethod {
   EFECTIVO = 'Efectivo',
@@ -34,7 +34,7 @@ export enum OrderOrigin {
 }
 
 @Entity({ name: 'pedidos' })
-export class Order {
+export class Order extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { name: 'id_pedido' })
   id: number;
 
@@ -63,9 +63,6 @@ export class Order {
 
   @Column({ name: 'email_contacto', length: 100, nullable: true })
   emailContacto: string;
-
-  @CreateDateColumn({ name: 'fecha' })
-  fecha: Date;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   subtotal: number;

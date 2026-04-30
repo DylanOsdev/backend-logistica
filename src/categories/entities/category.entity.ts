@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Product } from '../../products/entities/product.entity';
+import { BaseEntity } from '../../common/database/base.entity';
 
 export enum CategoryStatus {
   ACTIVA = 'Activa',
@@ -7,7 +8,7 @@ export enum CategoryStatus {
 }
 
 @Entity({ name: 'categorias' })
-export class Category {
+export class Category extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { name: 'id_categoria' })
   id: number;
 

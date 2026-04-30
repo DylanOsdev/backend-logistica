@@ -2,11 +2,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
 import { Category } from '../../categories/entities/category.entity';
+import { BaseEntity } from '../../common/database/base.entity';
 
 export enum ProductStatus {
   ACTIVO = 'Activo',
@@ -14,7 +14,7 @@ export enum ProductStatus {
 }
 
 @Entity({ name: 'productos' })
-export class Product {
+export class Product extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { name: 'id_producto' })
   id: number;
 
@@ -58,7 +58,4 @@ export class Product {
     default: ProductStatus.ACTIVO,
   })
   estado: ProductStatus;
-
-  @CreateDateColumn({ name: 'fecha_registro' })
-  fechaRegistro: Date;
 }
